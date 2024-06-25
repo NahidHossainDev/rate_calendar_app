@@ -33,13 +33,19 @@ const theme = createTheme({
 		...Array(23).fill("0px 3px 20px 0px rgba(0, 0, 0, 0.1)"),
 	] as Shadows,
 	components: {
-		MuiAlert: {
+		MuiButton: {
 			styleOverrides: {
-				root: ({ ownerState }) => ({
-					...(ownerState.severity === "info" && {
-						backgroundColor: "#60a5fa",
-					}),
+				root: ({ theme }) => ({
+					"&.MuiButton-containedPrimary:hover": {
+						backgroundColor: theme.palette.primary.main,
+					},
 				}),
+				containedPrimary: {
+					color: "white",
+					boxShadow: "none",
+					textTransform: "none",
+					fontSize: 14,
+				},
 			},
 		},
 	},
