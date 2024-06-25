@@ -1,3 +1,4 @@
+import { TanstackProvider } from "@/providers/TanstackProvider";
 import theme from "@/theme";
 import { ThemeProvider } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
@@ -20,7 +21,9 @@ export default function RootLayout({
 		<html lang='en'>
 			<body className={inter.className}>
 				<AppRouterCacheProvider>
-					<ThemeProvider theme={theme}>{children}</ThemeProvider>
+					<ThemeProvider theme={theme}>
+						<TanstackProvider>{children}</TanstackProvider>
+					</ThemeProvider>
 				</AppRouterCacheProvider>
 			</body>
 		</html>
