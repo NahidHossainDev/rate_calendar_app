@@ -3,9 +3,16 @@ import { FC } from "react";
 
 export const MainHeader: FC = () => {
 	return (
-		<AppBar elevation={0}>
+		<AppBar sx={{ py: 2, position: "sticky" }}>
 			<Container maxWidth={false}>
-				<Typography>Rate Calendar App</Typography>
+				<Typography
+					variant="h6"
+					color="white"
+					fontWeight={500}
+					textAlign={"center"}
+				>
+					Rate Calendar App
+				</Typography>
 			</Container>
 		</AppBar>
 	);

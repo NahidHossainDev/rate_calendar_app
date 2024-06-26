@@ -1,7 +1,8 @@
+"use client";
 import { Footer, MainHeader } from "@/components/organisms";
 import { Box, SxProps, Theme } from "@mui/material";
 
-export default function RootLayout({
+export default function Layout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
@@ -9,20 +10,13 @@ export default function RootLayout({
 	return (
 		<>
 			<MainHeader />
-			<Box
-				sx={{
-					...layoutSX,
-					backgroundColor: (theme) =>
-						theme.palette.background.default,
-				}}
-			>
-				{children}
-			</Box>
+			<Box sx={mainContentSx}>{children}</Box>
 			<Footer />
 		</>
 	);
 }
 
-const layoutSX: SxProps<Theme> = {
-	height: "100vh",
+const mainContentSx: SxProps<Theme> = {
+	minHeight: "100vh",
+	backgroundColor: (theme) => theme.palette.background.default,
 };
