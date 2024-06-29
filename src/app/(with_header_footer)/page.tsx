@@ -1,17 +1,23 @@
-import { SingleInputDateRangePicker } from "@/components/molecules";
-import { Paper, Stack, Typography } from "@mui/material";
+"use client";
+import { CustomCard } from "@/components/molecules";
+import { Filter } from "@/components/organisms";
+import { useRoomCalender } from "@/libs/queries";
+import { Stack } from "@mui/material";
+import { useSearchParams } from "next/navigation";
 
 export default function Home() {
+	const searchQuery = useSearchParams();
+	const { data } = useRoomCalender(searchQuery);
+
+	console.log(data);
+
 	return (
 		<Stack spacing={2} p={2}>
-			<Paper sx={{ p: 3, borderRadius: 2 }}>
-				<Typography variant="h6" fontWeight={600}>
-					Rate Calendar App
-				</Typography>
-				<SingleInputDateRangePicker />
-			</Paper>
+			<CustomCard>
+				<Filter />
+			</CustomCard>
 
-			<Paper>Button</Paper>
+			<CustomCard></CustomCard>
 		</Stack>
 	);
 }
