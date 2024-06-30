@@ -17,7 +17,8 @@ export const SingleInputDateRangePicker: FC<PropsType> = ({ onChange, ...rest })
 		const observer = new MutationObserver(() => {
 			const elements = document.getElementsByClassName("MuiDateRangeCalendar-root");
 			if (elements.length > 0 && elements[0].firstElementChild) {
-				elements[0].firstElementChild.style.display = "none";
+				const firstElementChild = elements[0].firstElementChild as HTMLElement;
+				firstElementChild.style.display = "none";
 			}
 		});
 
