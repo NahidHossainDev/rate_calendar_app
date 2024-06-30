@@ -23,7 +23,7 @@ export const RoomTableData: FC = () => {
 		left: 0,
 		background: "white",
 		textAlign: "left",
-		zIndex: 1,
+		zIndex: 3,
 		borderRight: "1px solid rgba(224, 224, 224, 1) ",
 		whiteSpace: "nowrap",
 	});
@@ -40,10 +40,10 @@ export const RoomTableData: FC = () => {
 
 	return (
 		<TableContainer component={Paper} sx={{ maxHeight: "calc(100vh - 300px)" }}>
-			<Table>
+			<Table stickyHeader>
 				<TableHead>
 					<TableRow>
-						<StickyTableCell></StickyTableCell>
+						<StickyTableCell />
 						{dates?.map((date, index) => (
 							<CustomTableCell key={index} sx={{ p: 1 }}>
 								<Box sx={{ maxWidth: 30 }}>{dayjs(date).format("ddd  DD")}</Box>
@@ -62,7 +62,7 @@ export const RoomTableData: FC = () => {
 									colSpan={room.inventory_calendar.length - 1}
 									sx={{
 										position: "relative",
-										borderRight:0
+										borderRight: 0,
 									}}
 								>
 									<Button
