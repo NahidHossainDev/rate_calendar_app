@@ -33,7 +33,7 @@ export const SingleInputDateRangePicker: FC<PropsType> = ({ onChange, ...rest })
 
 	return (
 		<LocalizationProvider dateAdapter={AdapterDayjs}>
-			<DemoContainer components={["SingleInputDateRangeField"]}>
+			<DemoContainer components={["SingleInputDateRangeField"]} sx={{ maxWidth: 300 }}>
 				<DateRangePicker
 					{...rest}
 					onChange={onChange}

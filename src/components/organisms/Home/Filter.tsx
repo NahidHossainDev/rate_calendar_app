@@ -46,7 +46,10 @@ export const Filter: FC = () => {
 			<Typography variant="h6" fontWeight={600}>
 				Rate Calendar App
 			</Typography>
-			<SingleInputDateRangePicker onChange={handleDateChange} defaultValue={{ ...values }} />
+			<SingleInputDateRangePicker
+				onChange={handleDateChange}
+				defaultValue={[dayjs(values?.start_date), dayjs(values?.end_date)]}
+			/>
 		</>
 	);
 };
