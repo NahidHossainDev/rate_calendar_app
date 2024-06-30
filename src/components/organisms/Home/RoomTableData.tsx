@@ -1,5 +1,7 @@
 import { useRoomCalender } from "@/libs/queries";
 import {
+	Box,
+	Button,
 	Paper,
 	Table,
 	TableBody,
@@ -7,18 +9,28 @@ import {
 	TableContainer,
 	TableHead,
 	TableRow,
+	Typography,
 } from "@mui/material";
 import { useSearchParams } from "next/navigation";
 import React, { FC } from "react";
 
 import { styled } from "@mui/system";
+import dayjs from "dayjs";
 
 export const RoomTableData: FC = () => {
 	const StickyTableCell = styled(TableCell)({
 		position: "sticky",
 		left: 0,
-		background: "#fff",
+		background: "white",
+		textAlign: "left",
 		zIndex: 1,
+		borderRight: "1px solid rgba(224, 224, 224, 1) ",
+		whiteSpace: "nowrap",
+	});
+
+	const CustomTableCell = styled(TableCell)({
+		borderRight: "1px solid rgba(224, 224, 224, 1) ", // Add column border color
+		textAlign: "right", // Align text to the right
 	});
 
 	const searchQuery = useSearchParams();
@@ -31,69 +43,95 @@ export const RoomTableData: FC = () => {
 			<Table>
 				<TableHead>
 					<TableRow>
-						<StickyTableCell>Room Name</StickyTableCell>
+						<StickyTableCell></StickyTableCell>
 						{dates?.map((date, index) => (
-							<TableCell key={index}>{date}</TableCell>
+							<CustomTableCell key={index} sx={{ p: 1 }}>
+								<Box sx={{ maxWidth: 30 }}>{dayjs(date).format("ddd  DD")}</Box>
+							</CustomTableCell>
 						))}
 					</TableRow>
 				</TableHead>
 				<TableBody>
 					{data?.data?.map((room, roomIndex) => (
 						<React.Fragment key={roomIndex}>
+							<TableRow sx={{ position: "relative" }}>
+								<StickyTableCell sx={{ borderRight: 0, width: "100%" }}>
+									<Box
+										sx={{
+											display: "flex",
+											width: "100%",
+											position: "relative",
+										}}
+									>
+										<Typography variant="h6">{room.name}</Typography>
+										<Button
+											variant="contained"
+											color="warning"
+											sx={{
+												py: 0.3,
+												ml: "auto",
+												// position: "fixed",
+												// right: 100,
+												// bottom: 10,
+											}}
+										>
+											+ Bulk Edit
+										</Button>
+									</Box>
+								</StickyTableCell>
+							</TableRow>
 							<TableRow>
-								<StickyTableCell rowSpan={4}>{room.name}</StickyTableCell>
-								<TableCell>Status</TableCell>
+								<StickyTableCell>Room Status</StickyTableCell>
 								{room.inventory_calendar?.map((cal, calIndex) => (
-									<TableCell key={calIndex}>
-										{cal.status ? "Sellable" : "Not Sellable"}
-									</TableCell>
+									<CustomTableCell
+										sx={{
+											background: cal?.status ? "green" : "red",
+											color: "white",
+										}}
+										key={calIndex}
+									>
+										{cal.status ? "Open" : "Closed"}
+									</CustomTableCell>
 								))}
 							</TableRow>
 							<TableRow>
-								<TableCell>Rooms to Sell</TableCell>
+								<StickyTableCell>Rooms to Sell</StickyTableCell>
 								{room.inventory_calendar.map((cal, calIndex) => (
-									<TableCell key={calIndex}>{cal.available}</TableCell>
+									<CustomTableCell key={calIndex}>
+										{cal.available}
+									</CustomTableCell>
 								))}
 							</TableRow>
 							<TableRow>
-								<TableCell>Net Booked</TableCell>
+								<StickyTableCell>Net Booked</StickyTableCell>
 								{room.inventory_calendar.map((cal, calIndex) => (
-									<TableCell key={calIndex}>{cal.booked}</TableCell>
+									<CustomTableCell key={calIndex}>{cal.booked}</CustomTableCell>
 								))}
 							</TableRow>
 							{room.rate_plans.map((ratePlan, ratePlanIndex) => (
 								<React.Fragment key={ratePlanIndex}>
 									<TableRow>
-										<StickyTableCell rowSpan={4}>
-											{ratePlan.name}
-										</StickyTableCell>
-										<TableCell>Occupancy</TableCell>
-										{Array(dates?.length)
-											.fill(room.occupancy)
-											.map((occupancy, index) => (
-												<TableCell key={index}>{occupancy}</TableCell>
-											))}
-									</TableRow>
-									<TableRow>
-										<TableCell>Rate</TableCell>
+										<StickyTableCell>{ratePlan.name}</StickyTableCell>
 										{ratePlan?.calendar?.map((rateCal, rateCalIndex) => (
-											<TableCell key={rateCalIndex}>{rateCal.rate}</TableCell>
+											<CustomTableCell key={rateCalIndex}>
+												{rateCal.rate}
+											</CustomTableCell>
 										))}
 									</TableRow>
 									<TableRow>
-										<TableCell>Min Length of Stay</TableCell>
+										<StickyTableCell>Min Length of Stay</StickyTableCell>
 										{ratePlan.calendar.map((rateCal, rateCalIndex) => (
-											<TableCell key={rateCalIndex}>
+											<CustomTableCell key={rateCalIndex}>
 												{rateCal.min_length_of_stay}
-											</TableCell>
+											</CustomTableCell>
 										))}
 									</TableRow>
 									<TableRow>
-										<TableCell>Reservation Deadline</TableCell>
+										<StickyTableCell>Reservation Deadline</StickyTableCell>
 										{ratePlan.calendar.map((rateCal, rateCalIndex) => (
-											<TableCell key={rateCalIndex}>
+											<CustomTableCell key={rateCalIndex}>
 												{rateCal.reservation_deadline}
-											</TableCell>
+											</CustomTableCell>
 										))}
 									</TableRow>
 								</React.Fragment>
