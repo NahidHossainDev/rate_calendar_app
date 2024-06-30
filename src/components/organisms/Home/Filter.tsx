@@ -16,7 +16,7 @@ interface IFilters {
 }
 
 const initialFilter = {
-	start_date: dayjs(new Date()).format("YYYY-MM-DD"),
+	start_date: dayjs().subtract(1, "month").startOf("month").format("YYYY-MM-DD"),
 	end_date: dayjs(new Date()).format("YYYY-MM-DD"),
 };
 export const Filter: FC = () => {
@@ -46,7 +46,7 @@ export const Filter: FC = () => {
 			<Typography variant="h6" fontWeight={600}>
 				Rate Calendar App
 			</Typography>
-			<SingleInputDateRangePicker onChange={handleDateChange} />
+			<SingleInputDateRangePicker onChange={handleDateChange} defaultValue={{ ...values }} />
 		</>
 	);
 };

@@ -4,7 +4,7 @@ import { roomServiceApi } from "../api";
 
 export const useRoomCalender = (query: ReadonlyURLSearchParams) =>
 	useQuery({
-		queryKey: ["room"],
+		queryKey: ["room", query.toString()],
 		queryFn: () => {
 			const finalQuery = new URLSearchParams(query);
 			if (!finalQuery.has("start_date") || !finalQuery.has("end_date")) {
