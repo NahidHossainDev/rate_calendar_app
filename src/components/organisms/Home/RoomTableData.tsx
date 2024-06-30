@@ -54,28 +54,25 @@ export const RoomTableData: FC = () => {
 				<TableBody>
 					{data?.data?.map((room, roomIndex) => (
 						<React.Fragment key={roomIndex}>
-							<TableRow sx={{ position: "relative" }}>
+							<TableRow>
 								<StickyTableCell sx={{ borderRight: 0, width: "100%" }}>
-									<Box
-										sx={{
-											display: "flex",
-											width: "100%",
-											position: "relative",
-										}}
-									>
-										<Typography variant="h6">{room.name}</Typography>
-									</Box>
+									<Typography variant="h6">{room.name}</Typography>
 								</StickyTableCell>
-								<CustomTableCell colSpan={room.inventory_calendar.length - 1}>
+								<CustomTableCell
+									colSpan={room.inventory_calendar.length - 1}
+									sx={{
+										position: "relative",
+										borderRight:0
+									}}
+								>
 									<Button
 										variant="contained"
 										color="warning"
 										sx={{
 											py: 0.3,
 											ml: "auto",
-											// position: "fixed",
-											// right: 100,
-											// bottom: 10,
+											position: "sticky",
+											right: 100,
 										}}
 									>
 										+ Bulk Edit
