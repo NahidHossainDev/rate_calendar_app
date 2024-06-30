@@ -1,5 +1,5 @@
 "use client";
-import { Footer, MainHeader } from "@/components/organisms";
+import { MainHeader } from "@/components/organisms";
 import { Box, SxProps, Theme } from "@mui/material";
 
 export default function Layout({
@@ -11,7 +11,7 @@ export default function Layout({
 		<>
 			<MainHeader />
 			<Box sx={mainContentSx}>{children}</Box>
-			<Footer />
+			{/* <Footer /> */}
 		</>
 	);
 }
