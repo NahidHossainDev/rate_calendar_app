@@ -39,7 +39,7 @@ export const RoomTableData: FC = () => {
 	const dates = data?.data[0].inventory_calendar.map((cal) => cal.date);
 
 	return (
-		<TableContainer component={Paper}>
+		<TableContainer component={Paper} sx={{ maxHeight: "calc(100vh - 300px)" }}>
 			<Table>
 				<TableHead>
 					<TableRow>
@@ -64,21 +64,23 @@ export const RoomTableData: FC = () => {
 										}}
 									>
 										<Typography variant="h6">{room.name}</Typography>
-										<Button
-											variant="contained"
-											color="warning"
-											sx={{
-												py: 0.3,
-												ml: "auto",
-												// position: "fixed",
-												// right: 100,
-												// bottom: 10,
-											}}
-										>
-											+ Bulk Edit
-										</Button>
 									</Box>
 								</StickyTableCell>
+								<CustomTableCell colSpan={room.inventory_calendar.length - 1}>
+									<Button
+										variant="contained"
+										color="warning"
+										sx={{
+											py: 0.3,
+											ml: "auto",
+											// position: "fixed",
+											// right: 100,
+											// bottom: 10,
+										}}
+									>
+										+ Bulk Edit
+									</Button>
+								</CustomTableCell>
 							</TableRow>
 							<TableRow>
 								<StickyTableCell>Room Status</StickyTableCell>

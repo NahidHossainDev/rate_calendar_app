@@ -17,6 +17,6 @@ export default function Layout({
 }
 
 const mainContentSx: SxProps<Theme> = {
-	minHeight: "100vh",
+	minHeight: "calc(100vh - 100px)",
 	backgroundColor: (theme) => theme.palette.background.default,
 };
