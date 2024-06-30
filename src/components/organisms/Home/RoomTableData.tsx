@@ -34,9 +34,18 @@ export const RoomTableData: FC = () => {
 	});
 
 	const searchQuery = useSearchParams();
-	const { data } = useRoomCalender(searchQuery);
+	const { data, isLoading, isError } = useRoomCalender(searchQuery);
 
 	const dates = data?.data[0].inventory_calendar.map((cal) => cal.date);
+
+	if (isLoading) return <Typography>Loading...</Typography>; /// Need to add loading table Skeleton
+
+	if (isError)
+		return (
+			<Typography color="danger" textAlign={"center"}>
+				Something went wrong please try again letter.
+			</Typography>
+		);
 
 	return (
 		<TableContainer component={Paper} sx={{ maxHeight: "calc(100vh - 300px)" }}>
